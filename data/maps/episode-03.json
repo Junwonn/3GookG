@@ -1,0 +1,43 @@
+{
+  "id": "episode-03",
+  "name": "3화 청주 구원",
+  "objective": "승리: 9턴 버티기 / 패배: 유비 퇴각",
+  "brief": "청주성이 포위되었다. 관군이 도착할 때까지 버티자.",
+  "victory": { "type": "survive", "turns": 9 },
+  "defeat": { "type": "unitDown", "unitId": "liu-bei" },
+  "rows": [
+    "m..f..f..m",
+    "..ff..ff..",
+    "f........f",
+    "...f..f...",
+    ".f......f.",
+    "rrbrrrrbrr",
+    "...f..f...",
+    "..........",
+    ".f..mm..f.",
+    "..........",
+    "m.f....f.m",
+    "..........",
+    "mm......mm"
+  ],
+  "units": [
+    { "id": "liu-bei", "generalId": "liu-bei", "side": "ally", "x": 4, "y": 9 },
+    { "id": "guan-yu", "generalId": "guan-yu", "side": "ally", "x": 1, "y": 7 },
+    { "id": "zhang-fei", "generalId": "zhang-fei", "side": "ally", "x": 7, "y": 7 },
+    { "id": "gong-jing", "generalId": "gong-jing", "side": "ally", "x": 6, "y": 10 },
+    { "id": "militia-1", "generalId": "militia-archer", "side": "ally", "x": 3, "y": 10 },
+
+    { "id": "han-zhong", "generalId": "han-zhong", "side": "enemy", "x": 4, "y": 2, "ai": { "type": "charge" } },
+    { "id": "turban-1", "generalId": "turban-infantry", "side": "enemy", "x": 2, "y": 4, "ai": { "type": "charge" } },
+    { "id": "turban-2", "generalId": "turban-infantry", "side": "enemy", "x": 7, "y": 4, "ai": { "type": "charge" } },
+    { "id": "turban-3", "generalId": "turban-cavalry", "side": "enemy", "x": 3, "y": 3, "ai": { "type": "charge" } },
+    { "id": "turban-4", "generalId": "turban-cavalry", "side": "enemy", "x": 6, "y": 2, "ai": { "type": "charge" } },
+    { "id": "turban-5", "generalId": "turban-spear", "side": "enemy", "x": 1, "y": 2, "ai": { "type": "charge" } },
+    { "id": "turban-6", "generalId": "turban-spear", "side": "enemy", "x": 8, "y": 2, "ai": { "type": "charge" } },
+    { "id": "turban-7", "generalId": "turban-archer", "side": "enemy", "x": 2, "y": 1, "ai": { "type": "charge" } },
+    { "id": "turban-8", "generalId": "turban-archer", "side": "enemy", "x": 7, "y": 1, "ai": { "type": "charge" } },
+    { "id": "turban-9", "generalId": "turban-infantry", "side": "enemy", "x": 4, "y": 0, "ai": { "type": "charge" } },
+    { "id": "turban-10", "generalId": "turban-infantry", "side": "enemy", "x": 5, "y": 0, "ai": { "type": "charge" } },
+    { "id": "turban-11", "generalId": "turban-cavalry", "side": "enemy", "x": 5, "y": 2, "ai": { "type": "charge" } }
+  ]
+}

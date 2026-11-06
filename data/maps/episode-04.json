@@ -1,0 +1,42 @@
+{
+  "id": "episode-04",
+  "name": "4화 사수관, 화웅",
+  "objective": "승리: 화웅 처치 / 패배: 유비 퇴각",
+  "brief": "반동탁 연합군이 사수관에 닿았다. 화웅을 쓰러뜨리자. 이제 맵이 커졌으니 화면을 끌어 둘러보세요.",
+  "theme": "dry",
+  "enemyScale": { "power": 0.82, "troops": 0.82 },
+  "victory": { "type": "unitDown", "unitId": "hua-xiong" },
+  "defeat": { "type": "unitDown", "unitId": "liu-bei" },
+  "rows": [
+    "mmmm.cc.mmmm",
+    "mmwwwggwwwmm",
+    "mm...ff...mm",
+    "m..f....f..m",
+    "m....ff....m",
+    "..f.......f.",
+    "....m..m....",
+    ".f..........",
+    "......f...f.",
+    "..m.f.......",
+    "........m...",
+    ".f.....f....",
+    ".....f......",
+    "..f........f",
+    "......f....."
+  ],
+  "units": [
+    { "id": "liu-bei", "generalId": "liu-bei", "side": "ally", "x": 5, "y": 13 },
+    { "id": "guan-yu", "generalId": "guan-yu", "side": "ally", "x": 3, "y": 12 },
+    { "id": "zhang-fei", "generalId": "zhang-fei", "side": "ally", "x": 7, "y": 12 },
+    { "id": "militia-archer", "generalId": "militia-archer", "side": "ally", "x": 5, "y": 12 },
+    { "id": "hua-xiong", "generalId": "hua-xiong", "side": "enemy", "x": 5, "y": 3, "ai": { "type": "defend", "radius": 3 } },
+    { "id": "dong-archer-1", "generalId": "dong-archer", "side": "enemy", "x": 6, "y": 2, "ai": { "type": "defend", "radius": 2 } },
+    { "id": "hu-zhen", "generalId": "hu-zhen", "side": "enemy", "x": 3, "y": 4, "ai": { "type": "wait" } },
+    { "id": "dong-infantry-1", "generalId": "dong-infantry", "side": "enemy", "x": 4, "y": 7, "ai": { "type": "charge" } },
+    { "id": "dong-infantry-2", "generalId": "dong-infantry", "side": "enemy", "x": 8, "y": 7, "ai": { "type": "charge" } },
+    { "id": "dong-spear-1", "generalId": "dong-spear", "side": "enemy", "x": 2, "y": 5, "ai": { "type": "charge" } },
+    { "id": "dong-spear-2", "generalId": "dong-spear", "side": "enemy", "x": 9, "y": 5, "ai": { "type": "charge" } },
+    { "id": "dong-archer-2", "generalId": "dong-archer", "side": "enemy", "x": 7, "y": 5, "ai": { "type": "wait" } },
+    { "id": "dong-cavalry-1", "generalId": "dong-cavalry", "side": "enemy", "x": 1, "y": 8, "ai": { "type": "charge" } }
+  ]
+}

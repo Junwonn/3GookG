@@ -1,0 +1,37 @@
+{
+  "id": "episode-01",
+  "name": "1화 황건적의 습격",
+  "objective": "승리: 적 전멸 / 패배: 유비 퇴각",
+  "brief": "도원에서 뜻을 맺은 세 형제의 첫 싸움. 누상촌을 습격한 황건적을 물리치자.",
+  "victory": { "type": "annihilate" },
+  "defeat": { "type": "unitDown", "unitId": "liu-bei" },
+  "rows": [
+    "mm..f...mm",
+    "m.....f..m",
+    "..f.......",
+    "....ff..f.",
+    "f.........",
+    "...m...m.f",
+    "rrbrrrrbrr",
+    "....f.....",
+    ".f....m.f.",
+    "...m......",
+    ".f...f....",
+    "........f.",
+    "m........m"
+  ],
+  "units": [
+    { "id": "liu-bei", "generalId": "liu-bei", "side": "ally", "x": 4, "y": 11 },
+    { "id": "guan-yu", "generalId": "guan-yu", "side": "ally", "x": 3, "y": 10 },
+    { "id": "zhang-fei", "generalId": "zhang-fei", "side": "ally", "x": 6, "y": 10 },
+
+    { "id": "turban-1", "generalId": "turban-infantry", "side": "enemy", "x": 2, "y": 4, "ai": { "type": "charge" } },
+    { "id": "turban-2", "generalId": "turban-infantry", "side": "enemy", "x": 7, "y": 4, "ai": { "type": "charge" } },
+    { "id": "deng-mao", "generalId": "deng-mao", "side": "enemy", "x": 5, "y": 3, "ai": { "type": "charge" } },
+    { "id": "turban-3", "generalId": "turban-spear", "side": "enemy", "x": 3, "y": 3, "ai": { "type": "wait" } },
+    { "id": "turban-4", "generalId": "turban-archer", "side": "enemy", "x": 8, "y": 2, "ai": { "type": "defend", "radius": 3 } },
+    { "id": "cheng-yuanzhi", "generalId": "cheng-yuanzhi", "side": "enemy", "x": 4, "y": 1, "ai": { "type": "defend", "radius": 2 } },
+    { "id": "turban-5", "generalId": "turban-infantry", "side": "enemy", "x": 3, "y": 1, "ai": { "type": "guard", "escortId": "cheng-yuanzhi", "radius": 2 } },
+    { "id": "turban-6", "generalId": "turban-archer", "side": "enemy", "x": 5, "y": 1, "ai": { "type": "guard", "escortId": "cheng-yuanzhi", "radius": 3 } }
+  ]
+}

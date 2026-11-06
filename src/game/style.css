@@ -1,0 +1,1012 @@
+:root {
+  --bg: #0b1017;
+  --bg-2: #121a25;
+  --panel: #151c28;
+  --panel-raised: #222b3a;
+  --line: rgba(255, 255, 255, 0.09);
+  --gold: #e9bd65;
+  --gold-soft: rgba(233, 189, 101, 0.32);
+  --text: #f3f0e8;
+  --muted: #aab3c1;
+  --ally: #4fb6ff;
+  --enemy: #ff9a4d;
+  --spirit: #b98cff;
+  --disabled-text: #7d8797;
+  --gap: 8px;
+  --button-height: 48px;
+  --font-title: 15px;
+  --font-body: 13px;
+  --font-small: 12px;
+  --portrait: 56px;
+  --panel-min: 124px;
+  --ease-out: cubic-bezier(0.2, 0.9, 0.3, 1);
+  --ease-back: cubic-bezier(0.2, 1.4, 0.4, 1);
+  font-family: system-ui, -apple-system, 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  height: 100%;
+  overflow: hidden;
+  background: var(--bg);
+  color: var(--text);
+  overscroll-behavior: none;
+  -webkit-text-size-adjust: 100%;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+/* ---------- 기본 배치: 세로 폰. 위에서 아래로 상단 줄, 맵, 정보, 버튼 ---------- */
+
+#app {
+  height: 100vh;
+  height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+  background: radial-gradient(120% 70% at 50% 0%, #1b2636 0%, var(--bg) 70%);
+}
+
+#topbar {
+  flex: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--gap);
+  padding: 6px 8px 6px 10px;
+  font-size: var(--font-body);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.05), transparent);
+  border-bottom: 1px solid var(--line);
+}
+
+#turn {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 5px 11px 5px 9px;
+  border: 1px solid var(--gold-soft);
+  border-radius: 999px;
+  background: rgba(233, 189, 101, 0.1);
+  color: #ffe9bd;
+  font-weight: 800;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+
+#turn::before {
+  content: '';
+  flex: none;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--ally);
+  box-shadow: 0 0 8px var(--ally);
+}
+
+#turn[data-phase='enemy']::before {
+  background: var(--enemy);
+  box-shadow: 0 0 8px var(--enemy);
+}
+
+#turn[data-phase='ended']::before {
+  background: var(--muted);
+  box-shadow: none;
+}
+
+#objective {
+  flex: 1;
+  min-width: 0;
+  color: var(--muted);
+  font-size: 11.5px;
+  line-height: 1.25;
+  text-align: right;
+  word-break: keep-all;
+  /* 두 줄을 넘지 않아야 맵 영역 크기가 화마다 달라지지 않는다 */
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+}
+
+#btn-menu,
+#btn-map {
+  flex: none;
+  display: inline-flex;
+  flex-direction: row;
+  gap: 5px;
+  min-height: 38px;
+  padding: 0 11px;
+  font-size: var(--font-small);
+  font-weight: 700;
+}
+
+#btn-menu .icon,
+#btn-map .icon {
+  width: 15px;
+  height: 15px;
+}
+
+#stage {
+  position: relative;
+  flex: 1 1 0;
+  min-height: 0;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#stage canvas {
+  display: block;
+  touch-action: none;
+  box-shadow: 0 6px 26px rgba(0, 0, 0, 0.55);
+}
+
+#info {
+  flex: none;
+  height: 122px;
+  overflow: hidden;
+  padding: 8px 10px;
+  background: linear-gradient(180deg, #1a2331, var(--panel));
+  border-top: 1px solid var(--gold-soft);
+  font-size: var(--font-body);
+  line-height: 1.35;
+}
+
+#info-main {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+}
+
+#portrait {
+  flex: none;
+  width: var(--portrait);
+  height: var(--portrait);
+  border-radius: 12px;
+  background: linear-gradient(160deg, #2b3546, #171e2a);
+  box-shadow: inset 0 0 0 1px var(--line), 0 3px 10px rgba(0, 0, 0, 0.45);
+}
+
+#portrait[data-side='ally'] {
+  background: radial-gradient(90% 90% at 50% 25%, #2f6db0, #12233c);
+  box-shadow: inset 0 0 0 1.5px rgba(79, 182, 255, 0.65), 0 3px 12px rgba(0, 0, 0, 0.5);
+}
+
+#portrait[data-side='enemy'] {
+  background: radial-gradient(90% 90% at 50% 25%, #a4522a, #2d1610);
+  box-shadow: inset 0 0 0 1.5px rgba(255, 154, 77, 0.65), 0 3px 12px rgba(0, 0, 0, 0.5);
+}
+
+#unit-info {
+  flex: 1;
+  min-width: 0;
+}
+
+#info-main[hidden],
+#skill-list[hidden] {
+  display: none;
+}
+
+.burning {
+  color: #ffb26b !important;
+  border-color: rgba(255, 150, 70, 0.5) !important;
+}
+
+/* 기술 목록: 정보 칸 자리에 펼친다. 폭이 좁으면 알아서 한 줄에 하나씩 놓인다. */
+#skill-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(96px, 1fr));
+  gap: var(--gap);
+}
+
+#skill-list button {
+  min-height: 44px;
+  padding: 4px 6px;
+  gap: 0;
+  border-color: rgba(185, 140, 255, 0.5);
+  background: linear-gradient(180deg, #6d48bd, #452a86);
+  line-height: 1.25;
+  animation: rise 0.22s var(--ease-out) backwards;
+}
+
+#skill-list button:nth-child(2) {
+  animation-delay: 40ms;
+}
+
+#skill-list button:nth-child(3) {
+  animation-delay: 80ms;
+}
+
+#skill-list button:nth-child(4) {
+  animation-delay: 120ms;
+}
+
+#skill-list button:disabled {
+  border-color: var(--line);
+  background: var(--panel-raised);
+}
+
+.skill-name {
+  font-size: var(--font-title);
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+.skill-detail {
+  font-size: var(--font-small);
+  font-weight: 500;
+  white-space: nowrap;
+  opacity: 0.88;
+}
+
+.unit-title {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  font-size: var(--font-title);
+}
+
+.unit-name {
+  font-weight: 800;
+}
+
+.unit-name.ally {
+  color: #8fd2ff;
+}
+
+.unit-name.enemy {
+  color: #ffbd85;
+}
+
+.unit-class {
+  color: var(--muted);
+  font-size: var(--font-small);
+}
+
+.meter {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 3px;
+}
+
+.meter-label {
+  flex: none;
+  width: 2.4em;
+  color: var(--muted);
+  font-size: 11px;
+}
+
+.meter-bar {
+  flex: 1;
+  height: 7px;
+  border-radius: 99px;
+  background: #060a10;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(255, 255, 255, 0.05);
+  overflow: hidden;
+}
+
+.meter-bar i {
+  display: block;
+  height: 100%;
+  width: 100%;
+  border-radius: 99px;
+  transform-origin: left center;
+  background: linear-gradient(180deg, #8fd6ff, var(--ally));
+  transition: transform 0.35s var(--ease-out);
+}
+
+.meter.enemy .meter-bar i {
+  background: linear-gradient(180deg, #ffc08a, var(--enemy));
+}
+
+.meter.spirit .meter-bar {
+  height: 5px;
+}
+
+.meter.spirit .meter-bar i {
+  background: linear-gradient(180deg, #d7bcff, var(--spirit));
+}
+
+.meter-num {
+  flex: none;
+  min-width: 3.9em;
+  text-align: right;
+  font-size: var(--font-small);
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.unit-stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 3px 4px;
+  height: 22px;
+  margin-top: 5px;
+  overflow: hidden;
+  color: var(--muted);
+  font-size: 11px;
+}
+
+.unit-stats span {
+  display: inline-flex;
+  gap: 3px;
+  align-items: center;
+  height: 21px;
+  padding: 0 6px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.04);
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+
+.unit-stats b {
+  color: var(--text);
+  font-weight: 700;
+}
+
+/* 병과 설명은 공간이 넉넉할 때만 보여 준다 */
+.unit-trait {
+  display: none;
+  margin-top: 5px;
+  color: #d4d9e1;
+  font-size: var(--font-small);
+  line-height: 1.4;
+  word-break: keep-all;
+}
+
+#message {
+  margin-top: 5px;
+  padding-left: 8px;
+  border-left: 2px solid var(--gold);
+  color: #f5e9cf;
+  font-size: var(--font-small);
+  line-height: 1.35;
+  word-break: keep-all;
+}
+
+#actions {
+  flex: none;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--gap);
+  padding: var(--gap);
+  background: var(--panel);
+}
+
+button {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  min-height: var(--button-height);
+  border: 1px solid rgba(255, 255, 255, 0.13);
+  border-radius: 11px;
+  background: linear-gradient(180deg, #303b4e, #222b3a);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.13), 0 2px 6px rgba(0, 0, 0, 0.4);
+  color: #fff;
+  font: inherit;
+  font-size: 14px;
+  font-weight: 800;
+  line-height: 1.15;
+  touch-action: manipulation;
+  cursor: pointer;
+  transition: transform 0.09s var(--ease-out), filter 0.09s, opacity 0.16s;
+}
+
+button:active:not(:disabled) {
+  transform: scale(0.95);
+  filter: brightness(1.22);
+}
+
+button:focus-visible {
+  outline: 3px solid #ffe08a;
+  outline-offset: 1px;
+}
+
+button:disabled {
+  border-color: rgba(255, 255, 255, 0.05);
+  background: #1a212d;
+  box-shadow: none;
+  color: var(--disabled-text);
+  cursor: default;
+}
+
+.icon {
+  width: 19px;
+  height: 19px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+#btn-attack:not(:disabled) {
+  border-color: rgba(255, 150, 130, 0.5);
+  background: linear-gradient(180deg, #d9503f, #94271c);
+}
+
+#btn-skill:not(:disabled) {
+  border-color: rgba(200, 165, 255, 0.5);
+  background: linear-gradient(180deg, #7c55cc, #4c2f93);
+}
+
+#btn-end:not(:disabled) {
+  border-color: rgba(255, 224, 150, 0.6);
+  background: linear-gradient(180deg, #edc26c, #b98529);
+  color: #2a1c05;
+}
+
+#btn-end.confirm:not(:disabled) {
+  border-color: rgba(255, 150, 130, 0.6);
+  background: linear-gradient(180deg, #e65a48, #a12a1d);
+  color: #fff;
+  animation: attention 0.8s ease-in-out infinite;
+}
+
+@keyframes attention {
+  50% {
+    filter: brightness(1.22);
+  }
+}
+
+kbd {
+  display: none;
+  font: inherit;
+  font-size: 10px;
+  font-weight: 500;
+  opacity: 0.72;
+}
+
+/* 마우스가 있는 PC에서만 키 안내를 보여 준다 */
+@media (hover: hover) and (pointer: fine) {
+  kbd {
+    display: inline;
+  }
+
+  button:hover:not(:disabled) {
+    filter: brightness(1.1);
+  }
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+}
+
+/* ---------- 세로로 긴 화면(Z플립 펼침 등): 남는 높이를 정보 영역과 큰 버튼에 쓴다 ---------- */
+
+@media (max-aspect-ratio: 3/4) and (min-height: 700px) {
+  :root {
+    --button-height: 54px;
+    --portrait: 68px;
+  }
+
+  #info {
+    height: 146px;
+  }
+}
+
+@media (max-aspect-ratio: 3/4) and (min-height: 790px) {
+  :root {
+    --button-height: 60px;
+    --portrait: 88px;
+    --font-title: 18px;
+    --font-body: 14px;
+    --font-small: 13px;
+  }
+
+  #info {
+    height: 186px;
+    padding: 12px;
+  }
+
+  button {
+    font-size: 15px;
+  }
+
+  .icon {
+    width: 21px;
+    height: 21px;
+  }
+
+  .meter-bar {
+    height: 9px;
+  }
+
+  .meter.spirit .meter-bar {
+    height: 6px;
+  }
+
+  .unit-trait {
+    display: block;
+  }
+
+  #message {
+    margin-top: 8px;
+    font-size: var(--font-body);
+  }
+}
+
+@media (max-aspect-ratio: 3/4) and (min-height: 860px) {
+  :root {
+    --button-height: 64px;
+    --portrait: 104px;
+  }
+
+  #info {
+    height: 216px;
+  }
+
+  #message {
+    margin-top: 12px;
+  }
+}
+
+/* ---------- 넓은 화면(가로 폰, 커버 화면, 폴드, 태블릿, PC): 왼쪽 맵, 오른쪽 패널 ---------- */
+
+@media (min-aspect-ratio: 3/4) {
+  #app {
+    display: grid;
+    /* 맵은 10:13 비율이므로 높이에 맞는 맵 폭(76.9dvh)을 뺀 나머지를 패널에 준다 */
+    grid-template-columns: minmax(0, 1fr) clamp(var(--panel-min), calc(100vw - 76.9dvh), 420px);
+    grid-template-rows: auto minmax(0, 1fr) auto;
+    grid-template-areas:
+      'stage top'
+      'stage info'
+      'stage actions';
+  }
+
+  #stage {
+    grid-area: stage;
+  }
+
+  #topbar {
+    grid-area: top;
+    flex-wrap: wrap;
+    background: var(--panel);
+    padding: var(--gap);
+    border-left: 1px solid var(--gold-soft);
+  }
+
+  #info {
+    grid-area: info;
+    height: auto;
+    border-top: 0;
+    border-left: 1px solid var(--gold-soft);
+    overflow-y: auto;
+    background: var(--panel);
+  }
+
+  #actions {
+    grid-area: actions;
+    grid-template-columns: repeat(2, 1fr);
+    border-left: 1px solid var(--gold-soft);
+  }
+
+  .unit-trait {
+    display: block;
+  }
+
+  .unit-stats {
+    height: auto;
+  }
+
+  #objective {
+    flex-basis: 100%;
+    order: 3;
+    text-align: left;
+  }
+
+  #result {
+    padding: var(--gap);
+  }
+}
+
+/* 패널이 좁은 경우(Z플립 커버 화면 등): 꼭 필요한 정보만 남긴다 */
+@media (min-aspect-ratio: 3/4) and (max-width: 520px) {
+  :root {
+    --portrait: 36px;
+    --button-height: 44px;
+    --font-title: 13px;
+    --font-body: 12px;
+    --font-small: 11px;
+    --gap: 4px;
+  }
+
+  #objective,
+  .unit-trait,
+  .icon:not(#btn-menu .icon, #btn-map .icon),
+  .turn-phase,
+  .meter-label {
+    display: none;
+  }
+
+  #turn {
+    padding: 3px 7px 3px 6px;
+    font-size: 11px;
+    gap: 4px;
+  }
+
+  #turn::before {
+    width: 6px;
+    height: 6px;
+  }
+
+  #btn-menu,
+  #btn-map {
+    min-height: 32px;
+    padding: 0 6px;
+  }
+
+  #btn-menu .label,
+  #btn-map .label {
+    display: none;
+  }
+
+  #info {
+    padding: 4px 6px;
+  }
+
+  #info-main {
+    gap: 6px;
+  }
+
+  .meter-num {
+    min-width: 0;
+    font-size: 10px;
+  }
+
+  .unit-stats {
+    gap: 2px;
+    font-size: 10px;
+  }
+
+  .unit-stats span {
+    height: 18px;
+    padding: 0 3px;
+  }
+
+  #message {
+    margin-top: 3px;
+    padding-left: 5px;
+  }
+
+  #actions button {
+    padding: 0;
+    font-size: 13px;
+    white-space: nowrap;
+  }
+}
+
+/* 큰 화면(폴드, 태블릿, PC): 글자와 그림을 키운다 */
+@media (min-aspect-ratio: 3/4) and (min-width: 640px) and (min-height: 560px) {
+  :root {
+    --button-height: 60px;
+    --portrait: 112px;
+    --font-title: 20px;
+    --font-body: 15px;
+    --font-small: 14px;
+    --panel-min: 200px;
+  }
+
+  #info-main {
+    flex-direction: column;
+  }
+
+  #unit-info {
+    width: 100%;
+  }
+
+  #message {
+    margin-top: 12px;
+    font-size: var(--font-body);
+  }
+}
+
+/* ---------- 결과 카드 ---------- */
+
+#result,
+#menu {
+  position: fixed;
+  inset: 0;
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(circle at 50% 42%, rgba(12, 18, 28, 0.62), rgba(4, 6, 10, 0.9));
+  animation: fade 0.22s ease-out;
+}
+
+#result[hidden],
+#menu[hidden] {
+  display: none;
+}
+
+@keyframes fade {
+  from {
+    opacity: 0;
+  }
+}
+
+@keyframes pop {
+  from {
+    opacity: 0;
+    transform: translateY(14px) scale(0.93);
+  }
+}
+
+#result-card,
+#menu-card {
+  border: 1px solid var(--gold-soft);
+  border-radius: 18px;
+  background: linear-gradient(170deg, #202a3a, #121823);
+  box-shadow: 0 22px 60px rgba(0, 0, 0, 0.65), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  animation: pop 0.34s var(--ease-back);
+}
+
+#result-card {
+  width: min(84vw, 340px);
+  max-height: 100%;
+  overflow-y: auto;
+  padding: 24px 18px 18px;
+  text-align: center;
+}
+
+#result-rule {
+  width: 56px;
+  height: 3px;
+  margin: 0 auto 14px;
+  border-radius: 3px;
+  background: var(--gold);
+  box-shadow: 0 0 14px var(--gold);
+}
+
+#result-card.defeat #result-rule {
+  background: #e4574a;
+  box-shadow: 0 0 14px #e4574a;
+}
+
+#result-card h1 {
+  margin: 0 0 8px;
+  font-size: 27px;
+  font-weight: 900;
+  line-height: 1.25;
+  word-break: keep-all;
+  background: linear-gradient(180deg, #fff3cf, #e9bd65);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+#result-card.defeat h1 {
+  background: linear-gradient(180deg, #ffd9d2, #e4685a);
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+
+#result-card p {
+  margin: 0 0 18px;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.5;
+  font-variant-numeric: tabular-nums;
+}
+
+#result-actions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap);
+}
+
+#result-actions button {
+  width: 100%;
+  flex-direction: row;
+  gap: 6px;
+  animation: rise 0.3s var(--ease-out) backwards;
+}
+
+#result-actions button:nth-child(2) {
+  animation-delay: 60ms;
+}
+
+#result-actions button:nth-child(3) {
+  animation-delay: 120ms;
+}
+
+#btn-next,
+#btn-restart:not(.secondary),
+#btn-resume {
+  border-color: rgba(255, 224, 150, 0.6);
+  background: linear-gradient(180deg, #edc26c, #b98529);
+  color: #2a1c05;
+}
+
+/* ---------- 메뉴 ---------- */
+
+#menu {
+  padding: var(--gap);
+}
+
+#menu-card {
+  width: min(88vw, 370px);
+  max-height: 100%;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap);
+  padding: 18px 16px;
+}
+
+#menu-card h1 {
+  margin: 0;
+  font-size: 21px;
+  font-weight: 900;
+}
+
+#menu-card h2 {
+  margin: 8px 0 0;
+  color: var(--gold);
+  font-size: 13px;
+  font-weight: 700;
+}
+
+#menu-current {
+  color: var(--muted);
+  font-size: 14px;
+}
+
+#menu-card > button {
+  flex: none;
+  flex-direction: row;
+  gap: 6px;
+}
+
+#episode-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap);
+}
+
+#episode-list button {
+  flex: none;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: var(--gap);
+  padding: 0 12px;
+  text-align: left;
+}
+
+.episode-state {
+  flex: none;
+  padding: 3px 8px;
+  border-radius: 99px;
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.episode-state.done {
+  background: rgba(109, 220, 150, 0.16);
+  color: #9be8b8;
+}
+
+.episode-state.open {
+  background: rgba(233, 189, 101, 0.18);
+  color: #ffdf9f;
+}
+
+#rotate-notice {
+  display: none;
+}
+
+/* 브라우저 주소창까지 있는 가로 화면처럼 높이가 아주 낮으면 맵을 누를 수 없다. */
+@media (orientation: landscape) and (max-height: 300px) {
+  #rotate-notice {
+    position: fixed;
+    inset: 0;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--bg);
+    font-size: 18px;
+    font-weight: 700;
+  }
+}
+
+/* 움직임을 줄이는 설정을 켠 사용자에게는 화면 전환 동작을 뺀다 */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 1ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 1ms !important;
+  }
+}
+
+/* 버튼에 display를 지정했으므로 hidden 속성이 계속 먹히도록 다시 적어 둔다 */
+button[hidden] {
+  display: none;
+}
+
+/* 전체 지도: 큰 맵을 한눈에 보고, 누른 곳으로 화면을 옮긴다 */
+#mapview {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 8px;
+  background: rgba(8, 12, 20, 0.88);
+}
+
+#mapview[hidden] {
+  display: none;
+}
+
+#mapview canvas {
+  flex: 0 1 auto;
+  min-height: 0;
+  max-width: 100%;
+  max-height: calc(100% - 40px);
+  border: 1px solid var(--gold-soft);
+  border-radius: 6px;
+  box-shadow: none;
+}
+
+#mapview p {
+  margin: 0;
+  flex: none;
+  color: var(--muted);
+  font-size: 12px;
+  text-align: center;
+  word-break: keep-all;
+}
+
+/* 좁은 화면에서는 지도 버튼을 그림만 남겨 목표 글자 자리를 지킨다 */
+@media (max-width: 520px) {
+  #btn-map .label {
+    display: none;
+  }
+
+  #btn-map {
+    padding: 0 9px;
+  }
+}
+
+#btn-map[hidden] {
+  display: none;
+}
+
+/* 폭이 좁은 세로 화면: 승패 조건이 잘리지 않도록 상단 줄의 다른 글자를 줄인다 */
+@media (max-aspect-ratio: 3/4) and (max-width: 400px) {
+  .turn-phase,
+  #btn-menu .label,
+  #btn-map .label {
+    display: none;
+  }
+}
+
+@media (max-aspect-ratio: 3/4) and (max-width: 430px) {
+  #turn.turn-long .turn-phase {
+    display: none;
+  }
+}

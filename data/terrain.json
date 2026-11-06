@@ -1,0 +1,11 @@
+{
+  "plain": { "name": "평지", "symbol": ".", "damageTaken": 1.0 },
+  "forest": { "name": "숲", "symbol": "f", "damageTaken": 0.8 },
+  "mountain": { "name": "산", "symbol": "m", "damageTaken": 0.65 },
+  "river": { "name": "강", "symbol": "r", "damageTaken": 1.0 },
+  "bridge": { "name": "다리", "symbol": "b", "damageTaken": 1.0 },
+  "wall": { "name": "성벽", "symbol": "w", "damageTaken": 1.0 },
+  "castle": { "name": "성내", "symbol": "c", "damageTaken": 0.85 },
+  "gate": { "name": "성문", "symbol": "g", "damageTaken": 0.8 },
+  "deck": { "name": "갑판", "symbol": "s", "damageTaken": 1.0 }
+}

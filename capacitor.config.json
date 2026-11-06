@@ -1,0 +1,8 @@
+{
+  "appId": "com.personal.battleprototype",
+  "appName": "3GookG",
+  "webDir": "dist",
+  "android": {
+    "backgroundColor": "#0b1017"
+  }
+}

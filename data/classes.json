@@ -1,0 +1,38 @@
+{
+  "infantry": {
+    "name": "보병",
+    "trait": "방패로 단단하게 버팁니다. 숲에서도 느려지지 않습니다.",
+    "move": 4,
+    "range": { "min": 1, "max": 1, "pattern": "any" },
+    "powerBonus": 0,
+    "guardBonus": 10,
+    "moveCost": { "plain": 1, "forest": 1, "mountain": 2, "bridge": 1, "castle": 1, "gate": 1, "deck": 1 }
+  },
+  "cavalry": {
+    "name": "기병",
+    "trait": "가장 빠르고 공격이 강합니다. 숲과 산에서는 크게 느려집니다.",
+    "move": 6,
+    "range": { "min": 1, "max": 1, "pattern": "any" },
+    "powerBonus": 10,
+    "guardBonus": 0,
+    "moveCost": { "plain": 1, "forest": 3, "mountain": 4, "bridge": 1, "castle": 1, "gate": 1, "deck": 1 }
+  },
+  "spear": {
+    "name": "창병",
+    "trait": "두 칸 앞까지 직선으로 찌릅니다.",
+    "move": 4,
+    "range": { "min": 1, "max": 2, "pattern": "line" },
+    "powerBonus": 5,
+    "guardBonus": 0,
+    "moveCost": { "plain": 1, "forest": 2, "mountain": 3, "bridge": 1, "castle": 1, "gate": 1, "deck": 1 }
+  },
+  "archer": {
+    "name": "궁병",
+    "trait": "멀리서 쏩니다. 바로 옆 적은 쏠 수 없고 몸이 약합니다.",
+    "move": 4,
+    "range": { "min": 2, "max": 3, "pattern": "any" },
+    "powerBonus": 0,
+    "guardBonus": -10,
+    "moveCost": { "plain": 1, "forest": 2, "mountain": 3, "bridge": 1, "castle": 1, "gate": 1, "deck": 1 }
+  }
+}

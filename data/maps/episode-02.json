@@ -1,0 +1,38 @@
+{
+  "id": "episode-02",
+  "name": "2화 황건적 토벌",
+  "objective": "승리: 고승 처치 / 패배: 유비 퇴각",
+  "brief": "의용군의 이름을 알릴 때다. 황건적 장수 고승을 쓰러뜨리자.",
+  "victory": { "type": "unitDown", "unitId": "gao-sheng" },
+  "defeat": { "type": "unitDown", "unitId": "liu-bei" },
+  "rows": [
+    "mmf....fmm",
+    "m...ff...m",
+    "..f....f..",
+    ".....f....",
+    "f.m....m.f",
+    "...f......",
+    ".f....f...",
+    "....m....f",
+    "f.....f...",
+    "..f.......",
+    "....f...m.",
+    ".m........",
+    "....f....."
+  ],
+  "units": [
+    { "id": "liu-bei", "generalId": "liu-bei", "side": "ally", "x": 4, "y": 11 },
+    { "id": "guan-yu", "generalId": "guan-yu", "side": "ally", "x": 2, "y": 10 },
+    { "id": "zhang-fei", "generalId": "zhang-fei", "side": "ally", "x": 6, "y": 10 },
+    { "id": "militia-1", "generalId": "militia-archer", "side": "ally", "x": 5, "y": 12 },
+
+    { "id": "gao-sheng", "generalId": "gao-sheng", "side": "enemy", "x": 4, "y": 1, "ai": { "type": "defend", "radius": 2 } },
+    { "id": "turban-5", "generalId": "turban-infantry", "side": "enemy", "x": 3, "y": 2, "ai": { "type": "guard", "escortId": "gao-sheng", "radius": 2 } },
+    { "id": "turban-6", "generalId": "turban-archer", "side": "enemy", "x": 6, "y": 1, "ai": { "type": "guard", "escortId": "gao-sheng", "radius": 3 } },
+    { "id": "turban-7", "generalId": "turban-spear", "side": "enemy", "x": 5, "y": 2, "ai": { "type": "guard", "escortId": "gao-sheng", "radius": 2 } },
+    { "id": "turban-1", "generalId": "turban-infantry", "side": "enemy", "x": 1, "y": 5, "ai": { "type": "charge" } },
+    { "id": "turban-2", "generalId": "turban-infantry", "side": "enemy", "x": 8, "y": 5, "ai": { "type": "charge" } },
+    { "id": "turban-3", "generalId": "turban-cavalry", "side": "enemy", "x": 4, "y": 3, "ai": { "type": "charge" } },
+    { "id": "turban-4", "generalId": "turban-archer", "side": "enemy", "x": 7, "y": 3, "ai": { "type": "wait" } }
+  ]
+}

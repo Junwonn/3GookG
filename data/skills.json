@@ -1,0 +1,221 @@
+{
+  "fire-attack": {
+    "name": "화공",
+    "kind": "stratagem",
+    "description": "십자 범위에 불을 지릅니다. 숲과 배 위의 적은 1.5배 피해를 받고, 숲과 배는 2턴 동안 탑니다. 강에는 못 씁니다.",
+    "cost": 40,
+    "effect": "damage",
+    "range": { "min": 1, "max": 3, "pattern": "any" },
+    "shape": "burst",
+    "radius": 1,
+    "targets": "enemy",
+    "power": 0.9,
+    "terrain": {
+      "plain": 1,
+      "forest": 1.5,
+      "mountain": 0.7,
+      "bridge": 1,
+      "deck": 1.5
+    },
+    "forbidCenter": ["river"],
+    "ignite": {
+      "terrain": [
+        "forest",
+        "deck"
+      ],
+      "turns": 2
+    },
+    "visual": "fire"
+  },
+  "rockfall": {
+    "name": "낙석",
+    "kind": "stratagem",
+    "description": "산 위나 산 옆의 적 하나에게 돌을 굴립니다. 지형 방어를 무시합니다.",
+    "cost": 30,
+    "effect": "damage",
+    "range": { "min": 1, "max": 3, "pattern": "any" },
+    "shape": "burst",
+    "radius": 0,
+    "targets": "enemy",
+    "power": 1.4,
+    "terrain": {
+      "plain": 1,
+      "forest": 1,
+      "mountain": 1,
+      "bridge": 1
+    },
+    "requireNear": "mountain",
+    "visual": "rock"
+  },
+  "rally": {
+    "name": "격려",
+    "kind": "stratagem",
+    "description": "십자 범위의 다친 아군 병력을 최대치의 20%만큼 회복합니다.",
+    "cost": 30,
+    "effect": "heal",
+    "range": { "min": 0, "max": 2, "pattern": "any" },
+    "shape": "burst",
+    "radius": 1,
+    "targets": "ally",
+    "power": 0.2,
+    "visual": "heal"
+  },
+  "twin-swords": {
+    "name": "쌍고검",
+    "kind": "special",
+    "description": "옆의 적 하나를 강하게 벱니다. 반격을 받지 않습니다.",
+    "cost": 50,
+    "effect": "damage",
+    "range": { "min": 1, "max": 1, "pattern": "any" },
+    "shape": "burst",
+    "radius": 0,
+    "targets": "enemy",
+    "power": 1.8,
+    "visual": "slash"
+  },
+  "dragon-slash": {
+    "name": "청룡참",
+    "kind": "special",
+    "description": "언월도를 휘둘러 상하좌우의 적을 모두 벱니다. 반격을 받지 않습니다.",
+    "cost": 50,
+    "effect": "damage",
+    "range": { "min": 0, "max": 0, "pattern": "any" },
+    "shape": "burst",
+    "radius": 1,
+    "targets": "enemy",
+    "power": 1.3,
+    "visual": "slash"
+  },
+  "serpent-pierce": {
+    "name": "사모 관통",
+    "kind": "special",
+    "description": "한 방향으로 두 칸을 꿰뚫어 그 줄의 적을 모두 찌릅니다. 반격을 받지 않습니다.",
+    "cost": 50,
+    "effect": "damage",
+    "range": { "min": 1, "max": 2, "pattern": "line" },
+    "shape": "pierce",
+    "radius": 0,
+    "targets": "enemy",
+    "power": 1.5,
+    "visual": "slash"
+  },
+  "heavy-blow": {
+    "name": "맹타",
+    "kind": "special",
+    "description": "옆의 적 하나를 힘껏 내려칩니다. 반격을 받지 않습니다.",
+    "cost": 50,
+    "effect": "damage",
+    "range": { "min": 1, "max": 1, "pattern": "any" },
+    "shape": "burst",
+    "radius": 0,
+    "targets": "enemy",
+    "power": 1.6,
+    "visual": "slash"
+  },
+  "great-fire": {
+    "name": "대화공",
+    "kind": "stratagem",
+    "description": "넓은 범위에 불을 지릅니다. 숲과 배 위의 적은 1.5배 피해를 받고, 숲과 배는 3턴 동안 탑니다. 강에는 못 씁니다.",
+    "cost": 70,
+    "effect": "damage",
+    "range": { "min": 1, "max": 4, "pattern": "any" },
+    "shape": "burst",
+    "radius": 2,
+    "targets": "enemy",
+    "power": 0.8,
+    "visual": "fire",
+    "terrain": {
+      "plain": 1,
+      "forest": 1.5,
+      "mountain": 0.7,
+      "bridge": 1,
+      "deck": 1.5
+    },
+    "forbidCenter": ["river"],
+    "ignite": {
+      "terrain": [
+        "forest",
+        "deck"
+      ],
+      "turns": 3
+    }
+  },
+  "great-rally": {
+    "name": "대격려",
+    "kind": "stratagem",
+    "description": "넓은 범위의 다친 아군 병력을 최대치의 25%만큼 회복합니다.",
+    "cost": 60,
+    "effect": "heal",
+    "range": { "min": 0, "max": 2, "pattern": "any" },
+    "shape": "burst",
+    "radius": 2,
+    "targets": "ally",
+    "power": 0.25,
+    "visual": "heal"
+  },
+  "arrow-rain": {
+    "name": "화살비",
+    "kind": "stratagem",
+    "description": "십자 범위에 화살을 퍼붓습니다. 반격을 받지 않습니다.",
+    "cost": 40,
+    "effect": "damage",
+    "range": { "min": 2, "max": 4, "pattern": "any" },
+    "shape": "burst",
+    "radius": 1,
+    "targets": "enemy",
+    "power": 0.85,
+    "visual": "arrow"
+  },
+  "hundred-pace": {
+    "name": "백보천양",
+    "kind": "special",
+    "description": "멀리 있는 적 하나를 꿰뚫듯 쏩니다. 반격을 받지 않습니다.",
+    "cost": 50,
+    "effect": "damage",
+    "range": { "min": 2, "max": 4, "pattern": "any" },
+    "shape": "burst",
+    "radius": 0,
+    "targets": "enemy",
+    "power": 1.8,
+    "visual": "arrow"
+  },
+  "charge": {
+    "name": "돌격",
+    "kind": "special",
+    "description": "한 방향으로 세 칸을 휩쓸어 그 줄의 적을 모두 칩니다. 반격을 받지 않습니다.",
+    "cost": 50,
+    "effect": "damage",
+    "range": { "min": 1, "max": 3, "pattern": "line" },
+    "shape": "pierce",
+    "radius": 0,
+    "targets": "enemy",
+    "power": 1.3,
+    "visual": "slash"
+  },
+  "lone-spear": {
+    "name": "일신시담",
+    "kind": "special",
+    "description": "창을 휘둘러 상하좌우의 적을 모두 찌릅니다. 반격을 받지 않습니다.",
+    "cost": 50,
+    "effect": "damage",
+    "range": { "min": 0, "max": 0, "pattern": "any" },
+    "shape": "burst",
+    "radius": 1,
+    "targets": "enemy",
+    "power": 1.4,
+    "visual": "slash"
+  },
+  "halberd-storm": {
+    "name": "방천 난무",
+    "kind": "special",
+    "description": "화극을 휘둘러 상하좌우의 적을 모두 벱니다. 반격을 받지 않습니다.",
+    "cost": 50,
+    "effect": "damage",
+    "range": { "min": 0, "max": 0, "pattern": "any" },
+    "shape": "burst",
+    "radius": 1,
+    "targets": "enemy",
+    "power": 1.25,
+    "visual": "slash"
+  }
+}

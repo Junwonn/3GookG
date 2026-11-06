@@ -1,0 +1,38 @@
+{
+  "id": "episode-07",
+  "name": "7화 여포의 배신",
+  "objective": "승리: 유비가 깃발에 도착 / 패배: 유비 퇴각",
+  "brief": "받아 준 여포가 서주를 빼앗았다. 동쪽 숲 너머 깃발까지 달아나자.",
+  "enemyScale": { "power": 0.66, "troops": 0.66 },
+  "victory": { "type": "reach", "x": 17, "y": 6, "unitId": "liu-bei" },
+  "defeat": { "type": "unitDown", "unitId": "liu-bei" },
+  "rows": [
+    "wwwww..f....m..f..",
+    "wcccw.....f....m..",
+    "wcccw..f.....f....",
+    "wcccw....m......f.",
+    "wcccg.......f.....",
+    "wcccc...f......m..",
+    "wcccw.....f.......",
+    "wwwww...f....f....",
+    ".......m......f...",
+    "..f.........m.....",
+    ".....f...f.......m",
+    "..m.......f...f...",
+    ".....f........m..."
+  ],
+  "units": [
+    { "id": "liu-bei", "generalId": "liu-bei", "side": "ally", "x": 6, "y": 5 },
+    { "id": "guan-yu", "generalId": "guan-yu", "side": "ally", "x": 7, "y": 3 },
+    { "id": "zhang-fei", "generalId": "zhang-fei", "side": "ally", "x": 7, "y": 7 },
+    { "id": "militia-archer", "generalId": "militia-archer", "side": "ally", "x": 5, "y": 6 },
+    { "id": "lu-bu", "generalId": "lu-bu", "side": "enemy", "x": 2, "y": 4, "ai": { "type": "charge" } },
+    { "id": "zhang-liao", "generalId": "zhang-liao", "side": "enemy", "x": 3, "y": 2, "ai": { "type": "charge" } },
+    { "id": "lu-cavalry-1", "generalId": "lu-cavalry", "side": "enemy", "x": 3, "y": 6, "ai": { "type": "charge" } },
+    { "id": "gao-shun", "generalId": "gao-shun", "side": "enemy", "x": 12, "y": 5, "ai": { "type": "defend", "radius": 3 } },
+    { "id": "lu-spear-1", "generalId": "lu-spear", "side": "enemy", "x": 13, "y": 3, "ai": { "type": "defend", "radius": 3 } },
+    { "id": "lu-spear-2", "generalId": "lu-spear", "side": "enemy", "x": 13, "y": 8, "ai": { "type": "defend", "radius": 3 } },
+    { "id": "lu-archer-1", "generalId": "lu-archer", "side": "enemy", "x": 15, "y": 5, "ai": { "type": "defend", "radius": 3 } },
+    { "id": "lu-infantry-1", "generalId": "lu-infantry", "side": "enemy", "x": 11, "y": 2, "ai": { "type": "wait" } }
+  ]
+}
